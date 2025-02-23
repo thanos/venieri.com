@@ -3,7 +3,6 @@ defmodule VenieriWeb.Admin.ItemActions.Rotate do
 
   @impl Backpex.ItemAction
 
-
   def icon(assigns, _item) do
     ~H"""
     <Backpex.HTML.CoreComponents.icon
@@ -17,11 +16,11 @@ defmodule VenieriWeb.Admin.ItemActions.Rotate do
   def label(_assigns, nil), do: "Rotate"
   def label(_assigns, item), do: "Rotate #{item.caption}"
 
-
-
   @impl Backpex.ItemAction
   def handle(socket, [item | _items], _data) do
-    path = Router.get_path(socket, socket.assigns.live_resource, socket.assigns.params, :show, item)
+    path =
+      Router.get_path(socket, socket.assigns.live_resource, socket.assigns.params, :show, item)
+
     {:noreply, Phoenix.LiveView.push_patch(socket, to: path)}
   end
 end

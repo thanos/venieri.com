@@ -8,7 +8,15 @@ defmodule Venieri.Archives.WorksTest do
 
     import Venieri.WorkFixtures
 
-    @invalid_attrs %{size: nil, year: nil, description: nil, title: nil, slug: nil, material: nil, show: nil}
+    @invalid_attrs %{
+      size: nil,
+      year: nil,
+      description: nil,
+      title: nil,
+      slug: nil,
+      material: nil,
+      show: nil
+    }
 
     test "list/0 returns all works" do
       work = work_fixture()
@@ -21,11 +29,19 @@ defmodule Venieri.Archives.WorksTest do
     end
 
     test "create_work/1 with valid data creates a work" do
-      valid_attrs = %{size: "some size", year: 1991, description: "some description", title: "some title", slug: "some-title", material: "some material", show: true}
+      valid_attrs = %{
+        size: "some size",
+        year: 1991,
+        description: "some description",
+        title: "some title",
+        slug: "some-title",
+        material: "some material",
+        show: true
+      }
 
       assert {:ok, %Work{} = work} = Works.create(valid_attrs)
       assert work.size == "some size"
-      assert work.year ==  1991
+      assert work.year == 1991
       assert work.description == "some description"
       assert work.title == "some title"
       assert work.slug == "some-title-1991"
@@ -39,7 +55,15 @@ defmodule Venieri.Archives.WorksTest do
 
     test "update_work/2 with valid data updates the work" do
       work = work_fixture()
-      update_attrs = %{size: "some updated size", year: 1992, description: "some updated description", title: "some updated title", material: "some updated material", show: false}
+
+      update_attrs = %{
+        size: "some updated size",
+        year: 1992,
+        description: "some updated description",
+        title: "some updated title",
+        material: "some updated material",
+        show: false
+      }
 
       assert {:ok, %Work{} = work} = Works.update(work, update_attrs)
       assert work.size == "some updated size"

@@ -9,7 +9,8 @@ defmodule VenieriWeb.ThermostatLive do
   end
 
   def mount(_params, _session, socket) do
-    temperature = 70 # Let's assume a fixed temperature for now
+    # Let's assume a fixed temperature for now
+    temperature = 70
     {:ok, assign(socket, :temperature, temperature)}
   end
 

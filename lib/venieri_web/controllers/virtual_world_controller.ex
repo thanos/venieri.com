@@ -1,5 +1,5 @@
-defmodule  VenieriWeb.VirtualWorldController do
-  use Phoenix.Controller,  formats: [:html]
+defmodule VenieriWeb.VirtualWorldController do
+  use Phoenix.Controller, formats: [:html]
 
   def virtual_world(conn, _) do
     render(
@@ -9,5 +9,4 @@ defmodule  VenieriWeb.VirtualWorldController do
       :virtual_world
     )
   end
-
 end

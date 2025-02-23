@@ -21,7 +21,13 @@ defmodule Venieri.ProjectsTest do
     end
 
     test "create/1 with valid data creates a project" do
-      valid_attrs = %{description: "some description", title: "some title", slug: "some-title", statement: "some statement", show: true}
+      valid_attrs = %{
+        description: "some description",
+        title: "some title",
+        slug: "some-title",
+        statement: "some statement",
+        show: true
+      }
 
       assert {:ok, %Project{} = project} = Projects.create(valid_attrs)
       assert project.description == "some description"
@@ -37,7 +43,14 @@ defmodule Venieri.ProjectsTest do
 
     test "update/2 with valid data updates the project" do
       project = project_fixture()
-      update_attrs = %{description: "some updated description", title: "some updated title", slug: "some-updated-title", statement: "some updated statement", show: false}
+
+      update_attrs = %{
+        description: "some updated description",
+        title: "some updated title",
+        slug: "some-updated-title",
+        statement: "some updated statement",
+        show: false
+      }
 
       assert {:ok, %Project{} = project} = Projects.update(project, update_attrs)
       assert project.description == "some updated description"

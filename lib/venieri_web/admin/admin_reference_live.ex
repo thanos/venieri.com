@@ -38,7 +38,7 @@ defmodule VenieriWeb.AdminReferenceLive do
         label: "Title",
         searchable: true,
         render: fn assigns ->
-           ~H'
+          ~H'
             <p class="truncate">
            <%= if @item.article_url do %>
              <a class="truncate link link-hover" href={@item.article_url}>
@@ -68,12 +68,13 @@ defmodule VenieriWeb.AdminReferenceLive do
         module: Backpex.Fields.Textarea,
         label: "Description",
         searchable: true
-      },
-
+      }
     ]
   end
+
   def truncate(value, len) do
     value
+
     if String.length(value) > len do
       String.slice(value, 0, len) <> "..."
     else

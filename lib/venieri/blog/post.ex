@@ -3,8 +3,8 @@ defmodule Venieri.Blog.Post do
   import Ecto.Changeset
 
   schema "blog_posts" do
-    field :title, :string
-    field :views, :integer
+    field(:title, :string)
+    field(:views, :integer)
 
     timestamps(type: :utc_datetime)
   end

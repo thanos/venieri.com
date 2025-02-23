@@ -49,10 +49,10 @@ defmodule VenieriWeb.AdminProjectLive do
         except: [:index],
         render: fn assigns ->
           ~H'''
-            <div>
-            {raw @value }
-            </div>
-            '''
+          <div>
+          {raw @value }
+          </div>
+          '''
         end
       },
       tags: %{
@@ -70,10 +70,10 @@ defmodule VenieriWeb.AdminProjectLive do
         except: [:index],
         render: fn assigns ->
           ~H'''
-            <div>
-              {raw @value }
-            </div>
-            '''
+          <div>
+            {raw @value }
+          </div>
+          '''
         end
       }
     ]

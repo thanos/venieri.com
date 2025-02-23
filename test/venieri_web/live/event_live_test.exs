@@ -5,9 +5,33 @@ defmodule VenieriWeb.EventLiveTest do
   import Venieri.EventFixtures
   import Venieri.AccountsFixtures
 
-  @create_attrs %{description: "some description", title: "some title", slug: "some slug", start_date: "2025-01-24T17:41:00", end_date: "2025-01-24T17:41:00", venue: "some venue", show: true}
-  @update_attrs %{description: "some updated description", title: "some updated title", slug: "some updated slug", start_date: "2025-01-25T17:41:00", end_date: "2025-01-25T17:41:00", venue: "some updated venue", show: false}
-  @invalid_attrs %{description: nil, title: nil, slug: nil, start_date: nil, end_date: nil, venue: nil, show: false}
+  @create_attrs %{
+    description: "some description",
+    title: "some title",
+    slug: "some slug",
+    start_date: "2025-01-24T17:41:00",
+    end_date: "2025-01-24T17:41:00",
+    venue: "some venue",
+    show: true
+  }
+  @update_attrs %{
+    description: "some updated description",
+    title: "some updated title",
+    slug: "some updated slug",
+    start_date: "2025-01-25T17:41:00",
+    end_date: "2025-01-25T17:41:00",
+    venue: "some updated venue",
+    show: false
+  }
+  @invalid_attrs %{
+    description: nil,
+    title: nil,
+    slug: nil,
+    start_date: nil,
+    end_date: nil,
+    venue: nil,
+    show: false
+  }
 
   defp create_event(_) do
     event = event_fixture()

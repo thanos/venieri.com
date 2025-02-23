@@ -1,6 +1,4 @@
 defmodule VenieriWeb.Components.Helpers do
-
-
   def fmt_date(date) do
     Calendar.strftime(date, "%B %Y")
   end

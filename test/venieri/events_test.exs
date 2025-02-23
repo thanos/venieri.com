@@ -8,7 +8,15 @@ defmodule Venieri.EventsTest do
 
     import Venieri.EventFixtures
 
-    @invalid_attrs %{description: nil, title: nil, slug: nil, start_date: nil, end_date: nil, venue: nil, show: nil}
+    @invalid_attrs %{
+      description: nil,
+      title: nil,
+      slug: nil,
+      start_date: nil,
+      end_date: nil,
+      venue: nil,
+      show: nil
+    }
 
     test "list/0 returns all events" do
       event = event_fixture()
@@ -21,7 +29,14 @@ defmodule Venieri.EventsTest do
     end
 
     test "create/1 with valid data creates a event" do
-      valid_attrs = %{description: "some description", title: "some title",  start_date: ~N[2025-01-24 17:41:00], end_date: ~N[2025-01-24 17:41:00], venue: "some venue", show: true}
+      valid_attrs = %{
+        description: "some description",
+        title: "some title",
+        start_date: ~N[2025-01-24 17:41:00],
+        end_date: ~N[2025-01-24 17:41:00],
+        venue: "some venue",
+        show: true
+      }
 
       assert {:ok, %Event{} = event} = Events.create(valid_attrs)
       assert event.description == "some description"
@@ -39,7 +54,15 @@ defmodule Venieri.EventsTest do
 
     test "update/2 with valid data updates the event" do
       event = event_fixture()
-      update_attrs = %{description: "some updated description", title: "some updated title",  start_date: ~N[2025-01-25 17:41:00], end_date: ~N[2025-01-25 17:41:00], venue: "some updated venue", show: false}
+
+      update_attrs = %{
+        description: "some updated description",
+        title: "some updated title",
+        start_date: ~N[2025-01-25 17:41:00],
+        end_date: ~N[2025-01-25 17:41:00],
+        venue: "some updated venue",
+        show: false
+      }
 
       assert {:ok, %Event{} = event} = Events.update(event, update_attrs)
       assert event.description == "some updated description"

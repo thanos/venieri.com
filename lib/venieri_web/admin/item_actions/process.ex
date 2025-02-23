@@ -18,23 +18,26 @@ defmodule VenieriWeb.Admin.ItemActions.Process do
   def label(_assigns, nil), do: "Process"
   def label(_assigns, item), do: "Process #{item.caption}"
 
-
-
   @impl Backpex.ItemAction
   def handle(socket, items, _data) do
     items
     |> Enum.each(fn item ->
       Media.process(item)
     end)
+
     socket =
       socket
       |> clear_flash()
       |> put_flash(:info, success_message(socket.assigns, items))
+
     {:ok, socket}
   end
 
   defp success_message(assigns, [_item]) do
-    Backpex.translate({"%{resource} has been added to the process queue successfully.", %{resource: assigns.singular_name}})
+    Backpex.translate(
+      {"%{resource} has been added to the process queue successfully.",
+       %{resource: assigns.singular_name}}
+    )
   end
 
   defp success_message(assigns, items) do
@@ -43,5 +46,4 @@ defmodule VenieriWeb.Admin.ItemActions.Process do
        %{resources: assigns.plural_name, count: Enum.count(items)}}
     )
   end
-
 end

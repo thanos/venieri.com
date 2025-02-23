@@ -16,22 +16,18 @@ defmodule VenieriWeb.AdminWorkLive do
 
   alias Venieri.Archives.Media
 
-
-
-
-
   def render_resource_slot(assigns, :show, :before_main) do
-      ~H"""
-      <div class="carousel">
-        <div class="carousel-item" :for={img <- @item.media}  >
-          <img
-             class="h-96 w-auto"
-            src={file_url(img.original_file)}
-            alt={img.caption} />
-        </div>
+    ~H"""
+    <div class="carousel">
+      <div class="carousel-item" :for={img <- @item.media}  >
+        <img
+           class="h-96 w-auto"
+          src={file_url(img.original_file)}
+          alt={img.caption} />
       </div>
-      """
-    end
+    </div>
+    """
+  end
 
   @impl Backpex.LiveResource
   def singular_name, do: "Work"
@@ -66,7 +62,7 @@ defmodule VenieriWeb.AdminWorkLive do
 
           assigns ->
             ~H'<p><%= Backpex.HTML.pretty_value(@value) %></p>'
-        end,
+        end
       },
       project: %{
         module: Backpex.Fields.BelongsTo,
@@ -80,7 +76,6 @@ defmodule VenieriWeb.AdminWorkLive do
         label: "Title",
         searchable: true
       },
-
       show: %{
         module: Backpex.Fields.Boolean,
         label: "Show",
@@ -106,15 +101,15 @@ defmodule VenieriWeb.AdminWorkLive do
         module: Backpex.Fields.Textarea,
         label: "Description",
         rows: 10,
-        except: [:index],render: fn assigns ->
+        except: [:index],
+        render: fn assigns ->
           ~H'''
-            <div>
-              {raw @value }
-            </div>
-            '''
+          <div>
+            {raw @value }
+          </div>
+          '''
         end
       },
-
       tags: %{
         module: Backpex.Fields.HasMany,
         label: "Tags",
@@ -123,7 +118,6 @@ defmodule VenieriWeb.AdminWorkLive do
         live_resource: VenieriWeb.AdminTagLive,
         except: [:index]
       },
-
       uploads: %{
         module: Backpex.Fields.Upload,
         label: "Upload Media",
@@ -148,8 +142,7 @@ defmodule VenieriWeb.AdminWorkLive do
         end,
         except: [:index, :resource_action],
         align: :center
-      },
-
+      }
     ]
   end
 
@@ -180,10 +173,12 @@ defmodule VenieriWeb.AdminWorkLive do
     dest = Path.join([:code.priv_dir(:venieri), "static", upload_dir(), file_name])
 
     File.cp!(path, dest)
+
     work
     |> Venieri.Repo.preload(:media)
     |> Venieri.Archives.Models.Work.changeset_update_media([media])
     |> Venieri.Repo.update!()
+
     {:ok, file_url(file_name)}
   end
 
@@ -204,6 +199,5 @@ defmodule VenieriWeb.AdminWorkLive do
     entry.uuid <> "." <> ext
   end
 
-  defp upload_dir, do: Path.join(["uploads",  "media"])
-
+  defp upload_dir, do: Path.join(["uploads", "media"])
 end

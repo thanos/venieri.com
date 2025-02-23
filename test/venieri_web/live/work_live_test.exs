@@ -5,9 +5,33 @@ defmodule VenieriWeb.WorkLiveTest do
   import Venieri.WorkFixtures
   import Venieri.AccountsFixtures
 
-  @create_attrs %{size: "some size", year: 1991, description: "some description", title: "some title", slug: "some-title", material: "some material", show: true}
-  @update_attrs %{size: "some updated size", year: 1992, description: "some updated description", title: "some-updated-title", slug: "some updated slug", material: "some updated material", show: false}
-  @invalid_attrs %{size: nil, year: nil, description: nil, title: nil, slug: nil, material: nil, show: false}
+  @create_attrs %{
+    size: "some size",
+    year: 1991,
+    description: "some description",
+    title: "some title",
+    slug: "some-title",
+    material: "some material",
+    show: true
+  }
+  @update_attrs %{
+    size: "some updated size",
+    year: 1992,
+    description: "some updated description",
+    title: "some-updated-title",
+    slug: "some updated slug",
+    material: "some updated material",
+    show: false
+  }
+  @invalid_attrs %{
+    size: nil,
+    year: nil,
+    description: nil,
+    title: nil,
+    slug: nil,
+    material: nil,
+    show: false
+  }
 
   defp create_work(_) do
     work = work_fixture()

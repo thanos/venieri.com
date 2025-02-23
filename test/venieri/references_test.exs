@@ -9,7 +9,15 @@ defmodule Venieri.ArchivesTest do
 
     import Venieri.ReferencesFixtures
 
-    @invalid_attrs %{description: nil, title: nil, publication_date: nil, publication: nil, authors: nil, article_url: nil, uploaded_file: nil}
+    @invalid_attrs %{
+      description: nil,
+      title: nil,
+      publication_date: nil,
+      publication: nil,
+      authors: nil,
+      article_url: nil,
+      uploaded_file: nil
+    }
 
     test "list/0 returns all archivess" do
       reference = reference_fixture()
@@ -22,7 +30,15 @@ defmodule Venieri.ArchivesTest do
     end
 
     test "create/1 with valid data creates a reference" do
-      valid_attrs = %{description: "some description", title: "some title", publication_date: ~D[2025-02-02], publication: "some publication", authors: "some authors", article_url: "some article_url", uploaded_file: "some uploaded_file"}
+      valid_attrs = %{
+        description: "some description",
+        title: "some title",
+        publication_date: ~D[2025-02-02],
+        publication: "some publication",
+        authors: "some authors",
+        article_url: "some article_url",
+        uploaded_file: "some uploaded_file"
+      }
 
       assert {:ok, %Reference{} = reference} = References.create(valid_attrs)
       assert reference.description == "some description"
@@ -40,7 +56,16 @@ defmodule Venieri.ArchivesTest do
 
     test "update/2 with valid data updates the reference" do
       reference = reference_fixture()
-      update_attrs = %{description: "some updated description", title: "some updated title", publication_date: ~D[2025-02-03], publication: "some updated publication", authors: "some updated authors", article_url: "some updated article_url", uploaded_file: "some updated uploaded_file"}
+
+      update_attrs = %{
+        description: "some updated description",
+        title: "some updated title",
+        publication_date: ~D[2025-02-03],
+        publication: "some updated publication",
+        authors: "some updated authors",
+        article_url: "some updated article_url",
+        uploaded_file: "some updated uploaded_file"
+      }
 
       assert {:ok, %Reference{} = reference} = References.update(reference, update_attrs)
       assert reference.description == "some updated description"

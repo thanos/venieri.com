@@ -21,7 +21,7 @@ defmodule VenieriWeb.TagLiveTest do
       {:ok, _index_live, html} =
         conn
         |> log_in_user(user_fixture())
-        |> live( ~p"/archives/tags")
+        |> live(~p"/archives/tags")
 
       assert html =~ "Listing Tags"
       assert html =~ tag.label
@@ -57,7 +57,7 @@ defmodule VenieriWeb.TagLiveTest do
       {:ok, index_live, _html} =
         conn
         |> log_in_user(user_fixture())
-        |> live( ~p"/archives/tags")
+        |> live(~p"/archives/tags")
 
       assert index_live |> element("#tags-#{tag.id} a", "Edit") |> render_click() =~
                "Edit Tag"
@@ -81,9 +81,10 @@ defmodule VenieriWeb.TagLiveTest do
 
     test "deletes tag in listing", %{conn: conn, tag: tag} do
       {:ok, index_live, _html} =
-      conn
-      |> log_in_user(user_fixture())
-      |> live(~p"/archives/tags")
+        conn
+        |> log_in_user(user_fixture())
+        |> live(~p"/archives/tags")
+
       assert index_live |> element("#tags-#{tag.id} a", "Delete") |> render_click()
       refute has_element?(index_live, "#tags-#{tag.id}")
     end
@@ -107,7 +108,6 @@ defmodule VenieriWeb.TagLiveTest do
         conn
         |> log_in_user(user_fixture())
         |> live(~p"/archives/tags/#{tag}")
-
 
       assert show_live |> element("a", "Edit") |> render_click() =~
                "Edit Tag"

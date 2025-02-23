@@ -1,30 +1,14 @@
-<.header>
-  Project {@project.id}
-  <:subtitle>This is a project record from your database.</:subtitle>
-  <:actions>
-    <.link patch={~p"/archives/projects/#{@project}/show/edit"} phx-click={JS.push_focus()}>
-      <.button>Edit project</.button>
-    </.link>
-  </:actions>
-</.header>
-
-<.list>
-  <:item title="Title">{@project.title}</:item>
-  <:item title="Slug">{@project.slug}</:item>
-  <:item title="Description">{@project.description}</:item>
-  <:item title="Statement">{@project.statement}</:item>
-  <:item title="Show">{@project.show}</:item>
-</.list>
-
-<.back navigate={~p"/archives/projects"}>Back to projects</.back>
-
-<.modal :if={@live_action == :edit} id="project-modal" show on_cancel={JS.patch(~p"/archives/projects/#{@project}")}>
-  <.live_component
-    module={VenieriWeb.Archives.ProjectLive.FormComponent}
-    id={@project.id}
-    title={@page_title}
-    action={@live_action}
-    project={@project}
-    patch={~p"/archives/projects/#{@project}"}
-  />
-</.modal>
+  <ul role="list" class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8">
+  <%= for work <- @project.works do %>
+  <li class="relative">
+    <div class="group overflow-hidden rounded-lg focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100">
+       <img 
+        class="pointer-events-none  object-cover group-hover:opacity-75"
+        src={Venieri.Archives.Works.image_url(work, 1024)}
+        alt={"Lydie Venieri - #{work.title}"} />
+    </div>
+    <p class="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900"><%= work.title %></p>
+    <p class="pointer-events-none block text-sm font-medium text-gray-500">3.9 MB</p>
+  </li>
+  <% end %>
+</ul>

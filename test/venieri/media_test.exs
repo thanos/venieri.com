@@ -8,7 +8,17 @@ defmodule Venieri.Archives.MediaTest do
 
     import Venieri.MediaFixtures
 
-    @invalid_attrs %{type: nil, width: nil, caption: nil, slug: nil, exernal_ref: nil, height: nil, old_id: nil, original_file: nil, meta_data: nil}
+    @invalid_attrs %{
+      type: nil,
+      width: nil,
+      caption: nil,
+      slug: nil,
+      video_uri: nil,
+      height: nil,
+      old_id: nil,
+      original_file: nil,
+      meta_data: nil
+    }
 
     test "list/0 returns all media" do
       media = media_fixture()
@@ -21,14 +31,23 @@ defmodule Venieri.Archives.MediaTest do
     end
 
     test "create/1 with valid data creates a media" do
-      valid_attrs = %{type: "some type", width: 42, caption: "some caption",  exernal_ref: "some exernal_ref", height: 42, old_id: 42, original_file: "some original_file", meta_data: %{}}
+      valid_attrs = %{
+        type: "some type",
+        width: 42,
+        caption: "some caption",
+        video_uri: "some video_uri",
+        height: 42,
+        old_id: 42,
+        original_file: "some original_file",
+        meta_data: %{}
+      }
 
       assert {:ok, %MediaModel{} = media} = Media.create(valid_attrs)
       assert media.type == "some type"
       assert media.width == 42
       assert media.caption == "some caption"
       assert media.slug == "some-caption"
-      assert media.exernal_ref == "some exernal_ref"
+      assert media.video_uri == "some video_uri"
       assert media.height == 42
       assert media.old_id == 42
       assert media.original_file == "some original_file"
@@ -41,14 +60,24 @@ defmodule Venieri.Archives.MediaTest do
 
     test "update/2 with valid data updates the media" do
       media = media_fixture()
-      update_attrs = %{type: "some updated type", width: 43, caption: "some updated caption",  exernal_ref: "some updated exernal_ref", height: 43, old_id: 43, original_file: "some updated original_file", meta_data: %{}}
+
+      update_attrs = %{
+        type: "some updated type",
+        width: 43,
+        caption: "some updated caption",
+        video_uri: "some updated video_uri",
+        height: 43,
+        old_id: 43,
+        original_file: "some updated original_file",
+        meta_data: %{}
+      }
 
       assert {:ok, %MediaModel{} = media} = Media.update(media, update_attrs)
       assert media.type == "some updated type"
       assert media.width == 43
       assert media.caption == "some updated caption"
       assert media.slug == "some-caption"
-      assert media.exernal_ref == "some updated exernal_ref"
+      assert media.video_uri == "some updated video_uri"
       assert media.height == 43
       assert media.old_id == 43
       assert media.original_file == "some updated original_file"

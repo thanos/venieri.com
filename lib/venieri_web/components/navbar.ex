@@ -9,21 +9,25 @@ defmodule VenieriWeb.Components.Navbar do
 
   def navbar(assigns) do
     ~H"""
-      <%= inspect({@socket.view,__MODULE__, @socket.view == __MODULE__}, limit: :infinity) %>
       <nav class="bg-white">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between">
           <div class="flex">
             <div class="flex shrink-0 items-center">
-              <img class="block h-5 w-auto lg:hidden" src="https://www.venieri.com/virtual-world/HerStory/images/hers016.gif" alt="Your Company">
-              <img class="hidden h-16 w-auto lg:block" src="https://www.venieri.com/virtual-world/HerStory/images/hers016.gif" alt="Your Company">
+              <img class="block h-5 w-auto lg:hidden" src="https://www.venieri.com/virtual-world/HerStory/images/hers016.gif" alt="Lydia Venieri">
+              <img class="hidden h-16 w-auto lg:block" src="https://www.venieri.com/virtual-world/HerStory/images/hers016.gif" alt="Lydia Venieri">
             </div>
             <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
+
               <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
                <.nav_item socket={@socket} link="/" page={VenieriWeb.EventList} tab="LYDIA VENIERI" />
+
                 <.nav_item socket={@socket} link="/bio" page={VenieriWeb.BioLive} tab="BIO" />
                 <.nav_item socket={@socket} link="/projects" page={VenieriWeb.ProjectsLive} tab="PROJECTS" />
                 <.nav_item socket={@socket} link="/virtual-world" page={VenieriWeb.VirtualWorldLive} tab="VIRTUAL WORLD" />
+                <%!-- <div class="inline-flex items-center">
+      <input type="text" placeholder="Search" class="input input-bordered h-1/2 md:w-auto" />
+    </div> --%>
             </div>
              <div class="sm:hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
               <!-- Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->

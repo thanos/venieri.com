@@ -1,6 +1,4 @@
 defmodule VenieriWeb.Admin.Fields.Boolean do
-
-
   @moduledoc """
   A field for handling a boolean value.
 
@@ -41,7 +39,6 @@ defmodule VenieriWeb.Admin.Fields.Boolean do
     </div>
     """
   end
-
 
   @impl Backpex.Field
   def render_index_form(assigns) do

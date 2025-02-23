@@ -8,10 +8,9 @@ defmodule Venieri.Archives.Models.ProjectTag do
   alias Venieri.Archives.Models.Project
   alias Venieri.Archives.Models.Tag
 
-
   schema "archives_projects_tags" do
-    belongs_to :project, Project, on_replace: :delete
-    belongs_to :tag, Tag, on_replace: :delete
+    belongs_to(:project, Project, on_replace: :delete)
+    belongs_to(:tag, Tag, on_replace: :delete)
 
     timestamps()
   end

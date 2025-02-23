@@ -1,4 +1,4 @@
-defmodule  VenieriWeb.Admin.ResourceActions.Rotate do
+defmodule VenieriWeb.Admin.ResourceActions.Rotate do
   use Backpex.ResourceAction
 
   import Ecto.Changeset
@@ -12,20 +12,20 @@ defmodule  VenieriWeb.Admin.ResourceActions.Rotate do
   # you can reuse Backpex fields in the field definition
   @impl Backpex.ResourceAction
   def fields do
-      [
-          original_file: %{
-              module: Backpex.Fields.Text,
-              label: "File",
-              type: :string
-          }
-      ]
+    [
+      original_file: %{
+        module: Backpex.Fields.Text,
+        label: "File",
+        type: :string
+      }
+    ]
   end
 
   @impl Backpex.ResourceAction
-  def changeset(change, attrs, _metadata \\[]) do
-      change
-      |> cast(attrs, [:original_file])
-      |> validate_required([:original_file])
+  def changeset(change, attrs, _metadata \\ []) do
+    change
+    |> cast(attrs, [:original_file])
+    |> validate_required([:original_file])
   end
 
   @impl Backpex.ResourceAction

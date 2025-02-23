@@ -62,7 +62,7 @@ defmodule VenieriWeb.AdminEventLive do
 
           assigns ->
             ~H'<p><%= Backpex.HTML.pretty_value(@value) %></p>'
-        end,
+        end
       },
       title: %{
         module: Backpex.Fields.Text,
@@ -77,10 +77,10 @@ defmodule VenieriWeb.AdminEventLive do
         module: Backpex.Fields.DateTime,
         label: "Start Date"
       },
-        end_date: %{
-          module: Backpex.Fields.DateTime,
-          label: "End Date"
-        },
+      end_date: %{
+        module: Backpex.Fields.DateTime,
+        label: "End Date"
+      },
       orientation: %{
         module: Backpex.Fields.Select,
         label: "Orientation",
@@ -95,17 +95,22 @@ defmodule VenieriWeb.AdminEventLive do
         module: Backpex.Fields.Text,
         label: "Slug"
       },
+      leader: %{
+        module: Backpex.Fields.Textarea,
+        label: "Leader"
+      },
       description: %{
         module: Backpex.Fields.Textarea,
         label: "Description",
         rows: 10,
         except: [:index],
-        except: [:index],render: fn assigns ->
+        except: [:index],
+        render: fn assigns ->
           ~H'''
-            <div>
-              {raw @value }
-            </div>
-            '''
+          <div>
+            {raw @value }
+          </div>
+          '''
         end
       },
       tags: %{
@@ -146,10 +151,12 @@ defmodule VenieriWeb.AdminEventLive do
     dest = Path.join([:code.priv_dir(:venieri), "static", upload_dir(), file_name])
 
     File.cp!(path, dest)
+
     work
     |> Venieri.Repo.preload(:media)
     |> Venieri.Archives.Models.Event.changeset_update_media([media])
     |> Venieri.Repo.update!()
+
     {:ok, file_url(file_name)}
   end
 
@@ -170,6 +177,5 @@ defmodule VenieriWeb.AdminEventLive do
     entry.uuid <> "." <> ext
   end
 
-  defp upload_dir, do: Path.join(["uploads",  "media"])
-
+  defp upload_dir, do: Path.join(["uploads", "media"])
 end

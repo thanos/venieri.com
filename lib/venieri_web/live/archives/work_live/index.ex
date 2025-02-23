@@ -6,8 +6,13 @@ defmodule VenieriWeb.Archives.WorkLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket
-    |> SEO.assign(%{title: "List of work"}), :works, Works.list()), temporary_assigns: [{SEO.key(), nil}]}
+    {:ok,
+     stream(
+       socket
+       |> SEO.assign(%{title: "List of work"}),
+       :works,
+       Works.list()
+     ), temporary_assigns: [{SEO.key(), nil}]}
   end
 
   @impl true

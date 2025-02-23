@@ -11,6 +11,7 @@ defmodule VenieriWeb.Archives.WorkLive.Show do
   @impl true
   def handle_params(%{"id" => id}, _, socket) do
     work = Works.get!(id)
+
     {:noreply,
      socket
      |> SEO.assign(work)

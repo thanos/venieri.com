@@ -12,7 +12,7 @@ defmodule Venieri.MediaFixtures do
       attrs
       |> Enum.into(%{
         caption: "some caption",
-        exernal_ref: "some exernal_ref",
+        video_uri: "some video_uri",
         height: 42,
         meta_data: %{},
         old_id: 42,
@@ -21,6 +21,7 @@ defmodule Venieri.MediaFixtures do
         width: 42
       })
       |> Venieri.Archives.Media.create()
+
     media
   end
 end

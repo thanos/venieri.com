@@ -4,8 +4,21 @@ defmodule VenieriWeb.ProjectLiveTest do
   import Phoenix.LiveViewTest
   import Venieri.ProjectsFixtures
   import Venieri.AccountsFixtures
-  @create_attrs %{description: "some description", title: "some title", slug: "some slug", statement: "some statement", show: true}
-  @update_attrs %{description: "some updated description", title: "some updated title", slug: "some updated slug", statement: "some updated statement", show: false}
+
+  @create_attrs %{
+    description: "some description",
+    title: "some title",
+    slug: "some slug",
+    statement: "some statement",
+    show: true
+  }
+  @update_attrs %{
+    description: "some updated description",
+    title: "some updated title",
+    slug: "some updated slug",
+    statement: "some updated statement",
+    show: false
+  }
   @invalid_attrs %{description: nil, title: nil, slug: nil, statement: nil, show: false}
 
   defp create_project(_) do

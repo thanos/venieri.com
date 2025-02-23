@@ -1,5 +1,6 @@
 defmodule VenieriWeb.AdminMediaLive do
-alias Venieri.Archives.Media
+  alias Venieri.Archives.Media
+
   use Backpex.LiveResource,
     adapter_config: [
       schema: Venieri.Archives.Models.Media,
@@ -15,7 +16,7 @@ alias Venieri.Archives.Media
     ],
     fluid?: true
 
-    require Logger
+  require Logger
 
   @impl Backpex.LiveResource
   def singular_name, do: "Media"
@@ -23,12 +24,10 @@ alias Venieri.Archives.Media
   @impl Backpex.LiveResource
   def plural_name, do: "Media"
 
-
-
   @impl Backpex.LiveResource
   def item_actions(default_actions) do
     default_actions
-    |> Enum.concat(process: %{module: VenieriWeb.Admin.ItemActions.Process })
+    |> Enum.concat(process: %{module: VenieriWeb.Admin.ItemActions.Process})
   end
 
   # def render_resource_slot(assigns, :index, :before_main) do
@@ -43,11 +42,9 @@ alias Venieri.Archives.Media
     """
   end
 
-
   @impl Backpex.LiveResource
   def fields do
     [
-
       id: %{
         module: Backpex.Fields.Text,
         label: "ID",
@@ -57,16 +54,14 @@ alias Venieri.Archives.Media
         module: Backpex.Fields.Upload,
         label: "Upload file",
         upload_key: :original_file,
-        accept: ~w(.jpg .jpeg .png),
+        accept: ~w(.jpg .jpeg .png .tif .webp .avif .heic .heif ),
         searchable: true,
-        max_file_size: 3_512_000,
+        max_file_size: 3_000_000_000,
         put_upload_change: &put_upload_change/6,
         consume_upload: &consume_upload/4,
         remove_uploads: &remove_uploads/3,
         list_existing_files: &list_existing_files/1,
-
         render: fn
-
           %{value: value} = assigns when value == "" or is_nil(value) ->
             ~H"<p><%= Backpex.HTML.pretty_value(@value) %></p>"
 
@@ -111,7 +106,7 @@ alias Venieri.Archives.Media
         label: "Old ID",
         readonly: true
       },
-      exernal_ref: %{
+      video_uri: %{
         module: Backpex.Fields.Text,
         label: "External reference",
         readonly: true
@@ -122,16 +117,17 @@ alias Venieri.Archives.Media
         rows: 10,
         except: [:index],
         readonly: true
-      },
-
+      }
     ]
   end
 
-  defp list_existing_files(%{original_file: original_file} = _item) when original_file != "" and not is_nil(original_file), do: [original_file]
+  defp list_existing_files(%{original_file: original_file} = _item)
+       when original_file != "" and not is_nil(original_file),
+       do: [original_file]
+
   defp list_existing_files(_item), do: []
 
   def put_upload_change(_socket, params, item, uploaded_entries, removed_entries, action) do
-    Logger.info("put_upload_change #{inspect(item)} #{inspect(uploaded_entries)} #{inspect(removed_entries)} #{inspect(action)}")
     existing_files = list_existing_files(item) -- removed_entries
 
     new_entries =
@@ -149,10 +145,10 @@ alias Venieri.Archives.Media
       [file] ->
         params
         |> Map.put("original_file", file)
-        # |> Map.put("caption", "too_many_files")
+
+      # |> Map.put("caption", "too_many_files")
       [_file | _other_files] ->
         Map.put(params, "original_file", "too_many_files")
-
 
       [] ->
         Map.put(params, "original_file", "")
@@ -160,44 +156,10 @@ alias Venieri.Archives.Media
   end
 
   defp consume_upload(_socket, item, %{path: path} = meta, entry) do
-    Logger.info("consume_upload #{inspect(item)} #{inspect(meta)} #{inspect(entry)}")
-    # dbg({item, meta, entry})
-    file_name = item.original_file
-    dest = Path.join([:code.priv_dir(:venieri), "static", upload_dir(), file_name])
-    File.cp!(path, dest)
-    Logger.info("File.cp!(#{path}, #{dest})")
-    {:ok, file_url(item)}
-
-
-
-
-
-    # Media.process_upload(item, entry, meta)
-    # dbg({item, entry}, label: "consume_upload")
-    # file_name = file_name(entry)
-    # dest = Path.join([:code.priv_dir(:venieri), "static", upload_dir(), file_name])
-    # File.mkdir_p!(Path.dirname(dest))
-    # dbg(dest)
-    # dbg(entry)
-    # File.cp!(path, dest)
-
-    # %{
-    #   "image_width" => image_width,
-    #   "image_height" => image_height,
-    #   "file_type" => file_type,
-    #   "mime_type" => mime_type,
-    # } = meta_data = ImageHelpers.info!(dest)
-
-    # item
-    # |> Media.update(%{
-    #   meta_data: meta_data,
-    #   type: file_type,
-    #   width: String.to_integer(image_width),
-    #   height: String.to_integer(image_height)
-    # })
-
-
-    # {:ok, file_url(file_name)}
+    {:ok,
+     Media.process_upload(item, path)
+     |> Media.url(480)
+    }
   end
 
   defp remove_uploads(_socket, _item, removed_entries) do
@@ -216,13 +178,11 @@ alias Venieri.Archives.Media
     [ext | _] = MIME.extensions(entry.client_type)
     slug = Slug.slugify(Path.rootname(entry.client_name))
     {:ok, id} = Snowflake.next_id()
-    uuid =  Slug.slugify(id |> Integer.to_string(36))
+    uuid = Slug.slugify(id |> Integer.to_string(36))
     "#{slug}-#{uuid}.#{ext}"
   end
 
   defp upload_dir, do: Path.join(["uploads", "media"])
-
-
 
   def handle_event("save", what, socket) do
     # dbg(what)

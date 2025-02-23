@@ -21,5 +21,4 @@ defmodule VenieriWeb.EventController do
 
     render(conn, :bio, shows: shows)
   end
-
 end

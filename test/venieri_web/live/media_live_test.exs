@@ -5,9 +5,37 @@ defmodule VenieriWeb.MediaLiveTest do
   import Venieri.MediaFixtures
   import Venieri.AccountsFixtures
 
-  @create_attrs %{type: "some type", width: 42, caption: "some caption",  exernal_ref: "some exernal_ref", height: 42, old_id: 42, original_file: "some original_file", meta_data: %{}}
-  @update_attrs %{type: "some updated type", width: 43, caption: "some updated caption",  exernal_ref: "some updated exernal_ref", height: 43, old_id: 43, original_file: "some updated original_file", meta_data: %{}}
-  @invalid_attrs %{type: nil, width: nil, caption: nil, slug: nil, exernal_ref: nil, height: nil, old_id: nil, original_file: nil, meta_data: nil}
+  @create_attrs %{
+    type: "some type",
+    width: 42,
+    caption: "some caption",
+    video_uri: "some video_uri",
+    height: 42,
+    old_id: 42,
+    original_file: "some original_file",
+    meta_data: %{}
+  }
+  @update_attrs %{
+    type: "some updated type",
+    width: 43,
+    caption: "some updated caption",
+    video_uri: "some updated video_uri",
+    height: 43,
+    old_id: 43,
+    original_file: "some updated original_file",
+    meta_data: %{}
+  }
+  @invalid_attrs %{
+    type: nil,
+    width: nil,
+    caption: nil,
+    slug: nil,
+    video_uri: nil,
+    height: nil,
+    old_id: nil,
+    original_file: nil,
+    meta_data: nil
+  }
 
   defp create_media(_) do
     media = media_fixture()

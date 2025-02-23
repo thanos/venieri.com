@@ -8,5 +8,5 @@ defmodule VenieriWeb.PageHTML do
 
   import VenieriWeb.Components.Navbar
 
-  embed_templates "page_html/*"
+  embed_templates("page_html/*")
 end

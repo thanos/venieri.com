@@ -3,7 +3,6 @@ defmodule VenieriWeb.Archives.MediaLive.FormComponent do
 
   alias Venieri.Archives.Media
 
-
   @impl true
   def render(assigns) do
     ~H"""
@@ -22,7 +21,7 @@ defmodule VenieriWeb.Archives.MediaLive.FormComponent do
       >
         <.input field={@form[:caption]} type="text" label="Caption" />
         <.input field={@form[:slug]} type="text" label="Slug" />
-        <.input field={@form[:exernal_ref]} type="text" label="Exernal ref" />
+        <.input field={@form[:video_uri]} type="text" label="Exernal ref" />
         <.input field={@form[:height]} type="number" label="Height" />
         <.input field={@form[:width]} type="number" label="Width" />
         <.input field={@form[:old_id]} type="number" label="Old" />

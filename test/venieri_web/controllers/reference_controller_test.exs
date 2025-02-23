@@ -3,9 +3,33 @@ defmodule VenieriWeb.ReferenceControllerTest do
 
   import Venieri.ReferencesFixtures
 
-  @create_attrs %{description: "some description", title: "some title", publication_date: ~D[2025-02-02], publication: "some publication", authors: "some authors", article_url: "some article_url", uploaded_file: "some uploaded_file"}
-  @update_attrs %{description: "some updated description", title: "some updated title", publication_date: ~D[2025-02-03], publication: "some updated publication", authors: "some updated authors", article_url: "some updated article_url", uploaded_file: "some updated uploaded_file"}
-  @invalid_attrs %{description: nil, title: nil, publication_date: nil, publication: nil, authors: nil, article_url: nil, uploaded_file: nil}
+  @create_attrs %{
+    description: "some description",
+    title: "some title",
+    publication_date: ~D[2025-02-02],
+    publication: "some publication",
+    authors: "some authors",
+    article_url: "some article_url",
+    uploaded_file: "some uploaded_file"
+  }
+  @update_attrs %{
+    description: "some updated description",
+    title: "some updated title",
+    publication_date: ~D[2025-02-03],
+    publication: "some updated publication",
+    authors: "some updated authors",
+    article_url: "some updated article_url",
+    uploaded_file: "some updated uploaded_file"
+  }
+  @invalid_attrs %{
+    description: nil,
+    title: nil,
+    publication_date: nil,
+    publication: nil,
+    authors: nil,
+    article_url: nil,
+    uploaded_file: nil
+  }
 
   describe "index" do
     test "lists all archives/references", %{conn: conn} do
@@ -71,9 +95,9 @@ defmodule VenieriWeb.ReferenceControllerTest do
       conn = delete(conn, ~p"/archives/references/#{reference}")
       assert redirected_to(conn) == ~p"/archives/references"
 
-      assert_error_sent 404, fn ->
+      assert_error_sent(404, fn ->
         get(conn, ~p"/archives/references/#{reference}")
-      end
+      end)
     end
   end
 

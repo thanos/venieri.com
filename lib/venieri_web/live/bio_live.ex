@@ -227,15 +227,16 @@ defmodule VenieriWeb.BioLive do
     # end
     solo_shows = Events.events_by_tag("Solo Show")
     group_shows = Events.events_by_tag("Group Show")
+
     references =
       References.list()
       |> Enum.sort_by(& &1.publication_date, :desc)
-      {:ok,
-        socket
-        |> assign(solo_shows: solo_shows)
-        |> assign(group_shows: group_shows)
-        |> assign(references: references)
-      }
+
+    {:ok,
+     socket
+     |> assign(solo_shows: solo_shows)
+     |> assign(group_shows: group_shows)
+     |> assign(references: references)}
 
     # {:ok,
     #  socket

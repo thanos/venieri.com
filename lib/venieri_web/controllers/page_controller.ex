@@ -15,14 +15,16 @@ defmodule VenieriWeb.PageController do
   def bio(conn, _params) do
     solo_shows = Events.events_by_tag("Solo Show")
     group_shows = Events.events_by_tag("Group Show")
+
     references =
       References.list()
       |> Enum.sort_by(& &1.publication_date, :desc)
-      render(conn, :bio,
-        solo_shows: solo_shows,
-        group_shows: group_shows,
-        references: references
-        )
+
+    render(conn, :bio,
+      solo_shows: solo_shows,
+      group_shows: group_shows,
+      references: references
+    )
   end
 
   def events(conn, params) do
@@ -63,10 +65,6 @@ defmodule VenieriWeb.PageController do
       :test
     )
   end
-
-
-
-
 
   def test(conn, _params) do
     # The home page is often custom made,

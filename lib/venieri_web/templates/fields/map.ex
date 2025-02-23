@@ -28,10 +28,15 @@ defmodule Backpex.Fields.Map do
 
   use Backpex.Field, config_schema: @config_schema
 
-
   @impl Backpex.Field
   def render_value(assigns) do
-    assigns = assign(assigns, :casted_value, maybe_cast_value(assigns.name, assigns.schema, assigns.value))
+    assigns =
+      assign(
+        assigns,
+        :casted_value,
+        maybe_cast_value(assigns.name, assigns.schema, assigns.value)
+      )
+
     ~H"""
 
     <p
@@ -97,6 +102,7 @@ defmodule Backpex.Fields.Map do
     </div>
     """
   end
+
   require Logger
   # @impl Backpex.Field
   # def before_changeset(changeset, %{"meta_data" => meta_data}, metadata, repo, field, assigns) do
@@ -150,7 +156,4 @@ defmodule Backpex.Fields.Map do
   # defp maybe_cast_form(val) when is_binary(val), do: val
   # defp maybe_cast_form(nil), do: Map.new(%{})
   # defp maybe_cast_form(%{} = val), do: Jason.encode!(val)
-
-
-
 end

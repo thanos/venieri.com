@@ -3,7 +3,6 @@ defmodule VenieriWeb.Archives.WorkLive.FormComponent do
 
   alias Venieri.Archives.Works
 
-
   @impl true
   def render(assigns) do
     ~H"""

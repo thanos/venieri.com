@@ -8,16 +8,13 @@ defmodule Venieri.Archives.Models.Tag do
   alias Venieri.Archives.Models.Work
   alias Venieri.Archives.Models.WorkTag
 
-
-
-
   schema "archives_tags" do
-    field :label, :string
+    field(:label, :string)
 
-    many_to_many :projects, Project, join_through: ProjectTag, on_replace: :delete
-    many_to_many :works, Work, join_through: WorkTag, on_replace: :delete
+    many_to_many(:projects, Project, join_through: ProjectTag, on_replace: :delete)
+    many_to_many(:works, Work, join_through: WorkTag, on_replace: :delete)
     # many_to_many :media, Media, join_through: MediaTag, on_replace: :delete
-    many_to_many :events, Event, join_through: EventTag, on_replace: :delete
+    many_to_many(:events, Event, join_through: EventTag, on_replace: :delete)
     timestamps(type: :utc_datetime)
   end
 

@@ -34,25 +34,26 @@ defmodule Backpex.Fields.Heex do
   alias Backpex.LiveResource
   alias Ecto.Changeset
 
-
   @impl Phoenix.LiveComponent
   def update(assigns, socket) do
     socket =
       socket
       |> assign(assigns)
-      # |> apply_action(assigns.type)
+
+    # |> apply_action(assigns.type)
 
     {:ok, socket}
   end
 
-
-
-
-
-
   @impl Backpex.Field
   def render_value(assigns) do
-    assigns = assign(assigns, :casted_value, maybe_cast_value(assigns.name, assigns.schema, assigns.value))
+    assigns =
+      assign(
+        assigns,
+        :casted_value,
+        maybe_cast_value(assigns.name, assigns.schema, assigns.value)
+      )
+
     ~H"""
 
     <p
@@ -63,16 +64,16 @@ defmodule Backpex.Fields.Heex do
       ]}
       phx-no-format
     >
-<LiveMonacoEditor.code_editor
-  style="min-height: 250px; width: 100%;"
-  value={@value |> Phoenix.json_library().encode!() |> Jason.Formatter.pretty_print()}
-  opts={
+    <LiveMonacoEditor.code_editor
+    style="min-height: 250px; width: 100%;"
+    value={@value |> Phoenix.json_library().encode!() |> Jason.Formatter.pretty_print()}
+    opts={
     Map.merge(
       LiveMonacoEditor.default_opts(),
       %{"language" => "json"}
     )
-  }
-/>
+    }
+    />
     </p>
 
     """
@@ -80,7 +81,13 @@ defmodule Backpex.Fields.Heex do
 
   @impl Backpex.Field
   def render_form(assigns) do
-    assigns = assign(assigns, :casted_value, maybe_cast_form(PhoenixForm.input_value(assigns.form, assigns.name)))
+    assigns =
+      assign(
+        assigns,
+        :casted_value,
+        maybe_cast_form(PhoenixForm.input_value(assigns.form, assigns.name))
+      )
+
     ~H"""
     <div>
       <Layout.field_container>
@@ -116,7 +123,7 @@ defmodule Backpex.Fields.Heex do
         <:label align={Backpex.Field.align_label(@field_options, assigns, :top)}>
           <Layout.input_label text={@field_options[:label]} />
         </:label>
- <BackpexForm.input
+    <BackpexForm.input
           value={@form[@name].value |> Jason.encode!() |> Jason.Formatter.pretty_print()}
           type="textarea"
           field={@form[@name]}
@@ -132,6 +139,7 @@ defmodule Backpex.Fields.Heex do
     </div>
     """
   end
+
   require Logger
   # @impl Backpex.Field
   # def before_changeset(changeset, %{"meta_data" => meta_data}, metadata, repo, field, assigns) do
@@ -168,8 +176,6 @@ defmodule Backpex.Fields.Heex do
   #   changeset
   # end
 
-
-
   defp maybe_cast_value(field_name, schema, value) do
     type = schema.__schema__(:type, field_name) || schema.__schema__(:virtual_type, field_name)
 
@@ -187,7 +193,4 @@ defmodule Backpex.Fields.Heex do
   defp maybe_cast_form(val) when is_binary(val), do: val
   defp maybe_cast_form(nil), do: Decimal.new("{}")
   defp maybe_cast_form(%{} = val), do: Jason.encode!(val)
-
-
-
 end

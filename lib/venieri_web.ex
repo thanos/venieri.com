@@ -17,7 +17,7 @@ defmodule VenieriWeb do
   those modules here.
   """
 
-  def static_paths, do: ~w(assets fonts media images favicon.ico robots.txt uploads)
+  def static_paths, do: ~w(assets fonts media images favicon.ico robots.txt uploads virtual_world)
 
   def router do
     quote do
